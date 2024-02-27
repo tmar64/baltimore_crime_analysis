@@ -4,6 +4,8 @@ Using a public Kaggle dataset containing century worth of Crime Data in Baltimor
 
 As a Baltimore resident, crime is hard to ignore and impacts life for me and many others, this inspired me to do analysis on the data :)
 
+THIS WILL BE UPDATED FREQUENTLY AS I WORK ON IT
+
 ***
 
 ### IMPORT
@@ -155,11 +157,11 @@ plt.title("Crime Frequency: Day of Week & Monthly Distribution")
 plt.tight_layout()
 plt.show()
 ```
-<img src="crime_distribution_weekhour.png" width = "500" height = "380">
+<img src="crime_distribution_weekhour.png" width = "550" height = "400">
 
 *(Fig 1) Heatmap of crime frequency based on day of week and hour of day. Everyday, crime count rises after 12PM and peaks from 3-5 PM. With the exception of Friday, Saturday, and Sunday nights where crime peaks through 12AM.*
 
-<img src="crime_weekmonth.png" width = "500" height = "380">
+<img src="crime_weekmonth.png" width = "650" height = "400">
 
 ***
 
@@ -192,5 +194,5 @@ HeatMap(
 base_map.save("map.html")
 ```
 
-<img src="shootings_alltime_heatmap" width = "500" height = "380">
+<img src="shootings_alltime_heatmap.png" width = "500" height = "500">
 
