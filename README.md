@@ -4,6 +4,7 @@ Using a public Kaggle dataset containing century worth of Crime Data in Baltimor
 
 As a Baltimore resident, crime is hard to ignore and impacts life for me and many others, this inspired me to do analysis on the data :)
 
+***
 
 ### IMPORT
 ```ruby
@@ -62,12 +63,16 @@ print()
 Anomaly Report:
 
 409,301 of the 516,635 WEAPON fields were blank, that is 79.26%!
+
 Anomalies in year:  126 / Many of the years were formatted incorrectly (1024)
+
 Anomalies in month:  0
+
 Anomalies in day:  0
 
+***
 
-### CREATING THE DATAFRAMES VISULIZATIONS
+### CREATING THE DATAFRAME FOR FIRST VISULIZATION
 ```ruby
 # converting the strings from date/time columns to usable objects
 df['Date'] = pd.to_datetime(df['Date'])
@@ -95,5 +100,62 @@ plt.xticks(rotation=0)
 plt.tight_layout()
 plt.show()
 ```
+<img src="total_crime_bymonth.png" width = "500" height = "380">
+
+*(Fig 1) Crime remains relatively consistent throughout the year with the exception of a drop in February, which follows a gradual rise, with the peak of crime being in August.*
 
 
+### CREATING THE DATAFRAME FOR OUR HEATMAPS
+```ruby
+date = df['Date'].iloc[0]
+time = df['Time'].iloc[0]
+
+df['Hour'] = df['Time'].apply(lambda time: time.hour)
+df['Month'] = df['Date'].apply(lambda date: date.month)
+df['Year'] = df['Date'].apply(lambda date: date.year)
+df['Day of Week'] = df['Date'].apply(lambda date: date.dayofweek)
+
+# Set the order of the days of the week based off their integer value
+day_order = [6, 5, 4, 3, 2, 1, 0]
+
+# Map integer value to their corresponding day
+df_map = {0: 'Mon', 1: 'Tue', 2: 'Wed', 3: 'Thu', 4: 'Fri', 5: 'Sat', 6: 'Sun'}
+
+# By default, days are out of order as they are in the DF, orders it to day_order
+df['Day of Week'] = pd.Categorical(df['Day of Week'], categories=day_order, ordered=True)
+df['Day of Week'] = df['Day of Week'].map(df_map)
+
+dayHour = df.groupby(by=['Day of Week', 'Hour'], observed=False).count()['RowID'].unstack()
+print(dayHour.head())
+
+fig, ax = plt.subplots(figsize=(10, 8))
+plt.xlabel('Hour', labelpad=15)
+plt.ylabel('Day of Week', labelpad=15)
+plt.xticks(rotation=0)
+
+# creates heatmap
+sns.heatmap(dayHour, cmap='magma_r')
+plt.title("Crime Frequency: Day of Week & Hourly Distribution")
+
+plt.tight_layout()
+plt.show()
+
+# heat map settings for crime frequency on day of week / month
+dayMonth = df.groupby(by=['Day of Week', 'Month'], observed=False).count()['RowID'].unstack()
+print(dayMonth.head())
+fig1, ax1 = plt.subplots(figsize=(10, 6))
+plt.xlabel('Month', labelpad=15)
+plt.ylabel('Day of Week', labelpad=15)
+plt.xticks(rotation=0)
+
+# creates heatmap
+sns.heatmap(dayMonth, cmap='viridis_r', linewidths=0.3)
+plt.xticks(ticks=range(12), labels=months_order)
+plt.title("Crime Frequency: Day of Week & Monthly Distribution")
+plt.tight_layout()
+plt.show()
+```
+<img src="crime_distribution_weekhour.png" width = "500" height = "380">
+*(Fig 1) Heatmap of crime frequency based on day of week and hour of day. Everyday, crime count rises after 12PM and peaks from 3-5 PM. With the exception of Friday, Saturday, and Sunday nights where crime peaks through 12AM.
+
+<img src="crime_distribution_weekmonth.png" width = "500" height = "380">
