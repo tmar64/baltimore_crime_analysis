@@ -156,6 +156,41 @@ plt.tight_layout()
 plt.show()
 ```
 <img src="crime_distribution_weekhour.png" width = "500" height = "380">
+
 *(Fig 1) Heatmap of crime frequency based on day of week and hour of day. Everyday, crime count rises after 12PM and peaks from 3-5 PM. With the exception of Friday, Saturday, and Sunday nights where crime peaks through 12AM.*
 
-<img src="crime_distribution_weekmonth.png" width = "500" height = "380">
+<img src="crime_weekmonth.png" width = "500" height = "380">
+
+***
+
+### CREATING DATAFRAME FOR OUR LIVE HEATMAP
+
+```ruby
+df_map = df[pd.notnull(df['Latitude'])]
+df_map = df[pd.notnull(df['Longitude'])]
+
+df_map['Latitude'].median()
+df_map['Longitude'].median()
+
+
+def generateBaseMap(default_location=[39.30364, -76.6139599], default_zoom_start=12):
+    base_map = folium.Map(location=default_location, control_scale=True, zoom_start=default_zoom_start)
+    return base_map
+
+
+base_map = generateBaseMap()
+
+df_map['count'] = 1
+df_murder = df_map[df_map['Description'] == 'SHOOTING']
+
+HeatMap(
+    data=df_murder[['Latitude', 'Longitude', 'count']].groupby(
+        ['Latitude', 'Longitude']).sum().reset_index().values.tolist(),
+    radius=8,
+    max_zoom=13).add_to(base_map)
+
+base_map.save("map.html")
+```
+
+<img src="shootings_alltime_heatmap" width = "500" height = "380">
+
