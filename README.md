@@ -156,6 +156,6 @@ plt.tight_layout()
 plt.show()
 ```
 <img src="crime_distribution_weekhour.png" width = "500" height = "380">
-*(Fig 1) Heatmap of crime frequency based on day of week and hour of day. Everyday, crime count rises after 12PM and peaks from 3-5 PM. With the exception of Friday, Saturday, and Sunday nights where crime peaks through 12AM.
+*(Fig 1) Heatmap of crime frequency based on day of week and hour of day. Everyday, crime count rises after 12PM and peaks from 3-5 PM. With the exception of Friday, Saturday, and Sunday nights where crime peaks through 12AM.*
 
 <img src="crime_distribution_weekmonth.png" width = "500" height = "380">
