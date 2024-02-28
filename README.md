@@ -6,6 +6,8 @@ As a resident, crime is hard to ignore and impacts life for me and many others, 
 
 THIS WILL BE UPDATED FREQUENTLY AS I WORK ON IT
 
+Dataset: https://www.kaggle.com/datasets/jeromiewilliams/baltimore-crime-data-2022/code
+
 ***
 
 ### IMPORT
