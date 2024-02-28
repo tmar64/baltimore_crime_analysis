@@ -1,8 +1,8 @@
 # baltimore_crime_analysis
 
-Using a public Kaggle dataset containing century worth of Crime Data in Baltimore City!
+I am using a public Kaggle dataset containing a century worth of Crime Data in Baltimore City!
 
-As a Baltimore resident, crime is hard to ignore and impacts life for me and many others, this inspired me to do analysis on the data :)
+As a resident, crime is hard to ignore and impacts life for me and many others, this inspired me to do analysis on the data :)
 
 THIS WILL BE UPDATED FREQUENTLY AS I WORK ON IT
 
